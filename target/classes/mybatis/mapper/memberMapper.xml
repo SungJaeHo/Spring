@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="MEMBER">
+	<insert id="insertMember">
+		INSERT INTO
+			tb_member
+				(user_id, password, email, tell)
+		VALUES
+			(#{userId}, #{password}, #{email}, #{tell})
+	</insert>
+	
+	<select id="selectMember" resultType="com.lu.boardapp.member.model.dto.Member">
+		SELECT
+			user_id, password, email, tell, reg_date
+		FROM
+			tb_member
+		WHERE
+			user_id = #{id}
+			AND password = #{pw}
+			AND is_leave = 0
+	</select>
+</mapper>
