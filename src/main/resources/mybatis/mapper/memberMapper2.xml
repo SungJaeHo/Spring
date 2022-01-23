@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="MEMBER">
+<!-- <mapper namespace="MEMBER">
 	<insert id="insertMember">
 		INSERT INTO
 			tb_member
@@ -22,4 +22,4 @@
 			AND password = #{pw}
 			AND is_leave = 0
 	</select>
-</mapper>
+</mapper> -->

@@ -1,47 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원 가입 양식</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/common.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/member.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/common.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/member.css" />
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="wrap">
-	<div class="memberBox">
-		<div class="join">
-		      <form 
-			       action="<%=request.getContextPath()%>/member/joinimpl.do"
-			       method="post" >
-<!-- 			       onsubmit="return validate();"> -->
-			       	<span class="sector-title">회원가입</span>
-			        <div class="join-info">
+	<div class="wrap">
+		<div class="memberBox">
+			<div class="join">
+				<form action=""
+					method="post">
+					<!-- 			       onsubmit="return validate();"> -->
+					<span class="sector-title">회원가입</span>
+					<div class="join-info">
 						<p>* id</p>
-						<button type="button" class="btn_id-check" onclick="xmlIdCheck()">ID 확인</button>
-				  		<input type="text" name="userId" id="userId" class="join-text" size="10"/>
-			  			<span id="id-check-msg" class="id-check-msg"></span>
-			  		</div>
-			  		<div class="join-info">
-				  		<p>* password</p>
-				  		<input type="password" name="password" id="userPwd" class="join-text" size="10"/>
-			  		</div>
-			  		<div class="join-info">
-				  		<p>* email</p>
-				  		<input type="text" name="email" class="join-text" size="10"/>
-				  	</div>
-				  	<div class="join-info">
-				  		<p>* hp</p>
-				  		<input type="text" name="tell" class="join-text" size="10"/>
-				  	</div>
-				  	<button type="submit" class="btn-join-submit">전송</button>
-			</form>
+						<button type="button" class="btn_id-check" onclick="xmlIdCheck()">ID
+							확인</button>
+						<input type="text" name="memberId" id="memberId" class="join-text"
+							size="10" /> <span id="id-check-msg" class="id-check-msg"></span>
+					</div>
+					<div class="join-info">
+						<p>* password</p>
+						<input type="password" name="memberPw" id="memberPw"
+							class="join-text" size="10" />
+					</div>
+					<div class="join-info">
+						<p>* email</p>
+						<input type="text" name="memberMail" id ="memberMail" class="join-text" size="10" />
+					</div>
+					<div class="join-info">
+						<p>* 주소</p>
+						<input type="text" name="memberAddr2" id ="memberAddr2" class="join-text" size="10" />
+					</div>
+					<button type="submit" class="btn-join-submit">전송</button>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
-
-<%-- 	<script type="text/javascript">
+	<script>
+		$(document).ready(function() {
+			//회원가입 버튼(회원가입 기능 작동)
+			$(".btn-join-submit").click(function() {
+				$("#join_form").attr("action", "/member/join");
+				$("#join_form").submit();
+			});
+		});
+	</script>
+	<%-- 	<script type="text/javascript">
 		var ajaxFlag = false;
 		function validate() {
 	        var pass = document.getElementById('password');
@@ -102,6 +116,6 @@
 		}
 		
 	</script> --%>
-	
+
 </body>
 </html>

@@ -16,6 +16,24 @@ public class MemberVO {
 	
 	//회원 우편번호
 	private String memberAddr1;
+
+	//회원 주소
+	private String memberAddr2;
+	
+	//회원 상세주소
+	private String memberAddr3;
+	
+	//관리자 구분(0:일반사용자, 1:관리자)
+	private int adminCk;
+	
+	//등록일자
+	private int regDate;
+	
+	//회원 돈
+	private int money;
+	
+	//회원 포인트
+	private int point;
 	
 	public String getMemberId() {
 		return memberId;
@@ -105,23 +123,6 @@ public class MemberVO {
 		this.point = point;
 	}
 
-	//회원 주소
-	private String memberAddr2;
-	
-	//회원 상세주소
-	private String memberAddr3;
-	
-	//관리자 구분(0:일반사용자, 1:관리자)
-	private int adminCk;
-	
-	//등록일자
-	private int regDate;
-	
-	//회원 돈
-	private int money;
-	
-	//회원 포인트
-	private int point;
 
 	@Override
 	public String toString() {
