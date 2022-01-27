@@ -5,43 +5,41 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 가입 양식</title>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/common.css" />
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/member.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/common.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/member.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/join.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
+	    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	    crossorigin="anonymous">
+</script>
+
 </head>
 <body>
 	<div class="wrap">
 		<div class="memberBox">
 			<div class="join">
-				<form action=""
-					method="post">
+				<form action="/member/join" method="post">
 					<!-- 			       onsubmit="return validate();"> -->
 					<span class="sector-title">회원가입</span>
 					<div class="join-info">
 						<p>* id</p>
-						<button type="button" class="btn_id-check" onclick="xmlIdCheck()">ID
-							확인</button>
-						<input type="text" name="memberId" id="memberId" class="join-text"
-							size="10" /> <span id="id-check-msg" class="id-check-msg"></span>
+						<input type="text" name="memberId" id="memberId" class="join-text" size="10" /> 
+							<span class="join-text_re_1" style="display:none">사용 가능한 아이디입니다.</span>
+							<span class="join-text_re_2" style="display:none">아이디가 이미 존재합니다.</span>
 					</div>
 					<div class="join-info">
 						<p>* password</p>
-						<input type="password" name="memberPw" id="memberPw"
-							class="join-text" size="10" />
+						<input type="password" name="memberPw" id="memberPw" class="join-text" size="10" />
 					</div>
 					<div class="join-info">
 						<p>* email</p>
-						<input type="text" name="memberMail" id ="memberMail" class="join-text" size="10" />
+						<input type="text" name="memberMail" id="memberMail" class="join-text" size="10" />
 					</div>
 					<div class="join-info">
 						<p>* 주소</p>
-						<input type="text" name="memberAddr2" id ="memberAddr2" class="join-text" size="10" />
+						<input type="text" name="memberAddr2" id="memberAddr2" class="join-text" size="10" />
 					</div>
-					<button type="submit" class="btn-join-submit">전송</button>
+					<button id = "submit" type="submit" class="btn-join-submit">전송</button>
 				</form>
 			</div>
 		</div>
@@ -54,6 +52,32 @@
 				$("#join_form").submit();
 			});
 		});
+		//아이디 중복검사
+		$('#memberId').on("propertychange change keyup paste input", function(){
+			
+			//console.log("keyup 테스트");
+			
+			var memberId = $('#memberId').val(); // .id_input에 입력되는 값
+			var data = {memberId : memberId} // '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+			
+			$.ajax({
+				type : "post",
+				url : "/member/memberIdChk",
+				data : data,
+				success : function(result){
+					// console.log("성공 여부" + result);
+					if(result != 'fail'){
+						$('.join-text_re_1').css("display","inline-block");
+						$('.join-text_re_2').css("display", "none");		
+						$('#submit').show();
+					} else {
+						$('.join-text_re_2').css("display","inline-block");
+						$('.join-text_re_1').css("display", "none");
+						$('#submit').hide();
+					}
+				}// success 종료
+			}); // ajax 종료
+		});// function 종료
 	</script>
 	<%-- 	<script type="text/javascript">
 		var ajaxFlag = false;

@@ -20,4 +20,9 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.insert("MEMBER.memberJoin",memberVO);
 	}
 	
+	@Override
+	public int idCheck(String memberId) {
+		return sqlSession.selectOne("MEMBER.idCheck", memberId);
+	}
+	
 }
