@@ -5,33 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/common.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/member.css" />
+<link rel="stylesheet" href="/resources/css/member/login.css">
 </head>
-
 <body>
-<div class="wrap">
-	<div class="memberBox">
-		<div class="login">
-			<form action="<%=request.getContextPath()%>/member/loginimpl.do" method="post">
-				
-				<p>id</p>
-				<input class="login-text" type="text" name="id"/>
-				<span id="checkMsg" class="checkMsg"></span>
-				
-				<p>password</p>
-				<input class="login-text" type="password" name="pw"/>
-				
-				<span class="btn-login">
-					<button>Login</button>
-				</span>
-				<span class="btn-signup">
-					<a href="<%=request.getContextPath() %>/member/join.do"><button type="button">회원가입</button></a>
-				</span>
-			</form>
-				
+
+<div class="wrapper">
+	
+	<div class="wrap">
+		<div class="logo_wrap">
+			<span>가입 부탁드립니다!</span>
 		</div>
+		<div class="login_wrap"> 
+			<div class="id_wrap">
+					<div class="id_input_box">
+					<input class="id_input">
+				</div>
+			</div>
+			<div class="pw_wrap">
+				<div class="pw_input_box">
+					<input class="pw_iput">
+				</div>
+			</div>
+			<div class="login_button_wrap">
+				<input type="button" class="login_button" value="로그인">
+			</div>			
+			<div class="login_button_wrap">
+				<a href="<%=request.getContextPath() %>/member/join"><input type="button" class="login_button" value="회원가입"></a>
+			</div>			
+		</div>
+		
+		
 	</div>
+
 </div>
+
 </body>
 </html>

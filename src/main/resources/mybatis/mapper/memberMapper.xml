@@ -5,8 +5,8 @@
   <mapper namespace="MEMBER">
   	<insert id="memberJoin">
   		insert into book_member values(
-  			#{memberId}, #{memberPw},"재호",#{memberMail},"수원",
-  			#{memberAddr2}, "수원", 0, now(), 100000, 5000 
+  			#{memberId}, #{memberPw},#{memberName},#{memberMail},#{memberAddr1},
+  			#{memberAddr2}, #{memberAddr3}, 0, now(), 100000, 5000 
   		)
   	</insert>
   	
