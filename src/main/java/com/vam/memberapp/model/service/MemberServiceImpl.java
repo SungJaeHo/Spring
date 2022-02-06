@@ -24,4 +24,10 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return memberDao.idCheck(memberId);
 	}
+	
+	@Override
+	public MemberVO memberLogin(MemberVO member) throws Exception {
+		System.out.println("MemberServiceImpl : " + member);
+		return memberDao.memberLogin(member);
+	}
 }

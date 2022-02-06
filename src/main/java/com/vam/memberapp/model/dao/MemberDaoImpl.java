@@ -24,5 +24,17 @@ public class MemberDaoImpl implements MemberDao{
 	public int idCheck(String memberId) {
 		return sqlSession.selectOne("MEMBER.idCheck", memberId);
 	}
-	
+	@Override
+	public MemberVO memberLogin(MemberVO member) {
+		
+		MemberVO lvo = null;
+		
+		try {
+			lvo = sqlSession.selectOne("MEMBER.memberLogin",member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("MemberDaoImpl : " + lvo);
+		return lvo;
+	}
 }

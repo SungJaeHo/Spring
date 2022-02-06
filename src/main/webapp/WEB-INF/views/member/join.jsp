@@ -14,7 +14,7 @@
 <body>
 
 	<div class="wrapper">
-		<form action="/member/join" id="join_form" method="post" >
+		<form action="" id="join_form" method="post" >
 			<div class="wrap">
 				<div class="subjecet">
 					<span>회원가입</span>
@@ -74,7 +74,7 @@
 					<div class="address_name">주소</div>
 					<div class="address_input_1_wrap">
 						<div class="address_input_1_box">
-							<input class="address_input_1" name="memberAddr1" disabled="readonly">
+							<input class="address_input_1" name="memberAddr1" readonly>
 						</div>
 						<div class="address_button" onclick="execution_daum_address()">
 							<span>주소 찾기</span>
@@ -83,12 +83,12 @@
 					</div>
 					<div class="address_input_2_wrap">
 						<div class="address_input_2_box">
-							<input class="address_input_2" name="memberAddr2" disabled="readonly">
+							<input class="address_input_2" name="memberAddr2" readonly>
 						</div>
 					</div>
 					<div class="address_input_3_wrap">
 						<div class="address_input_3_box">
-							<input class="address_input_3" name="memberAddr3" disabled="readonly">
+							<input class="address_input_3" name="memberAddr3" readonly>
 						</div>
 					</div>
 				</div>
@@ -141,6 +141,14 @@ $(document).ready(function(){
         }else{
             $('.final_pw_ck').css('display', 'none');
             pwCheck = true;
+        }
+        /* 비밀번호 확인유효성 검사 */
+        if(pw == ""){
+            $('.final_pwck_ck').css('display','block');
+            pwckCheck = false;
+        }else{
+            $('.final_pwck_ck').css('display', 'none');
+            pwckCheck = true;
         }
         
         /* 이름 유효성 검사 */
@@ -292,19 +300,16 @@ function execution_daum_address(){
                 }
                 // 주소변수 문자열과 참고항목 문자열 합치기
                 addr += extraAddr;
-            
             } else {
-            	addr += ' ';
+            	 addr += ' ';
             }
 
             $(".address_input_1").val(data.zonecode);
             //$("[name=memberAddr1]").val(data.zonecode);    // 대체가능
             $(".address_input_2").val(addr);
             //$("[name=memberAddr2]").val(addr);            // 대체가능
-            // 상세주소 입력란 disabled 속성 변경 및 커서를 상세주소 필드로 이동한다.
             $(".address_input_3").attr("readonly",false);
-             $(".address_input_3").focus();
-
+            $(".address_input_3").focus();
  	     }
 	  }).open();  
  	 
