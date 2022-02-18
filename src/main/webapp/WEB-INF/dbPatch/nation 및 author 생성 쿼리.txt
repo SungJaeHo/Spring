@@ -1,27 +1,28 @@
--- 국가 테이블 생성
 create table semi_nation(
     NATIONID varchar(2) primary key,
     NATIONNAME varchar(50)
 );
 select *
 		from semi_nation;
--- 국가 테이블 데이터 삽입
-insert into semi_nation values ('01', '국내');
-insert into semi_nation values ('02', '국외');
+
+insert into semi_nation values ('01', '援��궡');
+insert into semi_nation values ('02', '援��쇅');
  
--- 작가 테이블 생성
+
 create table semi_author(
     AUTHORID int auto_increment primary key,
     AUTHORNAME varchar(50),
     NATIONID varchar(2),
     AUTHORINTRO text,
+    REGDATE DATE NOT NULL,
+    UPDATEDATE DATE NOT NULL,
     foreign key (NATIONID) references semi_nation(NATIONID)
 );
 alter table semi_author add regDate timestamp default now();
 alter table semi_author add updateDate timestamp default now();
 alter table semi_author auto_increment = 1;		
-insert into semi_author(authorName, nationId, authorIntro) values('유홍준', '01', '작가 소개입니다' );
-insert into semi_author(authorName, nationId, authorIntro) values('김난도', '01', '작가 소개입니다' );
-insert into semi_author(authorName, nationId, authorIntro) values('폴크루그먼', '02', '작가 소개입니다' );    
+insert into semi_author(authorName, nationId, authorIntro) values('�쑀�솉以�', '01', '�옉媛� �냼媛쒖엯�땲�떎' );
+insert into semi_author(authorName, nationId, authorIntro) values('源��궃�룄', '01', '�옉媛� �냼媛쒖엯�땲�떎' );
+insert into semi_author(authorName, nationId, authorIntro) values('�뤃�겕猷④렇癒�', '02', '�옉媛� �냼媛쒖엯�땲�떎' );    
 select *
 		from semi_author 

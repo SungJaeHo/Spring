@@ -36,5 +36,19 @@ public class AuthorServiceImpl implements AuthorService {
         logger.info("(service)authorGetTotal()......." + cri);
         return authorDao.authorGetTotal(cri);
     }
+
+	@Override
+	public AuthorVO authorGetDetail(int authorId) throws Exception {
+		logger.info("(service)authorGetDetail()......." + authorId);
+		return authorDao.authorGetDetail(authorId);
+	}
+
+	@Override
+	public int authorModify(AuthorVO author) throws Exception {
+		logger.info("(service)authorModify()......." + author);
+		return authorDao.authorModify(author);
+	}
+    
+    
     
 }

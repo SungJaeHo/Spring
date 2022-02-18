@@ -17,8 +17,7 @@
 	</insert>
 
 	<!-- 작가 목록 -->
-	<select id="authorGetList"
-		resultType="com.vam.memberapp.model.dto.AuthorVO">
+	<select id="authorGetList" resultType="com.vam.memberapp.model.dto.AuthorVO">
 
 		select authorId, authorName, nationId, regDate, updateDate
 		from semi_author
@@ -45,5 +44,19 @@
 
 	</select>
 
+	<!-- 작가 디테일 페이지 -->
+	<select id = "authorGetDetail" resultType="com.vam.memberapp.model.dto.AuthorVO">
+	
+		select * from semi_author where authorid = #{authorId}
+		
+	</select>
+	
+	<!-- 작가 내용 수정 -->
+	<update id="authorModify">
+		update semi_author 
+			set 
+		authorName=#{authorName}, nationId=#{nationId}, authorIntro=#{authorIntro} 
+		, updatedate=now() where authorId = #{authorId}
+	</update>
 
 </mapper>
