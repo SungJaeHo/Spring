@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vam.memberapp.model.Criteria;
 import com.vam.memberapp.model.dto.AuthorVO;
 import com.vam.memberapp.model.dto.BookVO;
+import com.vam.memberapp.model.dto.CateVO;
 import com.vam.memberapp.model.dto.PageDTO;
 import com.vam.memberapp.model.service.AdminService;
 import com.vam.memberapp.model.service.AuthorService;
@@ -43,15 +45,57 @@ public class AdminController {
     
     /* 상품 등록 페이지 접속 */
     @RequestMapping(value = "/goodsManage", method = RequestMethod.GET)
-    public void goodsManageGET() throws Exception{
-        logger.info("상품 등록 페이지 접속");
+    public void goodsManageGET(Criteria cri, Model model) throws Exception{
+        logger.info("상품 관리(상품목록) 페이지 접속");
+        
+		/* 상품 리스트 데이터 */
+		List list = adminService.goodsGetList(cri);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+		} else {
+			model.addAttribute("listCheck", "empty");
+			return;
+		}
+		
+		logger.info("상품 관리(상품목록) 페이지 접속"+ list);
+		/* 페이지 인터페이스 데이터 */
+		model.addAttribute("pageMaker", new PageDTO(cri, adminService.goodsGetTotal(cri)));
+        
     }
     
     /* 상품 등록 페이지 접속 */
     @RequestMapping(value = "/goodsEnroll", method = RequestMethod.GET)
-    public void goodsEnrollGET() throws Exception{
-        logger.info("상품 등록 페이지 접속");
+    public void goodsEnrollGET(Model model , CateVO cateVO) throws Exception{
+        
+    	logger.info("상품 등록 페이지 접속");
+        
+    	ObjectMapper objm = new ObjectMapper();
+    	
+        List list = adminService.cateList(cateVO);
+        
+        String cateList = objm.writeValueAsString(list);
+        
+        model.addAttribute("cateList",cateList);
+        
+        logger.info("변경전 ::::::>>>>>>>>>" + list );
+        logger.info("변경후 ::::::>>>>>>>>>" + cateList);
+        
     }
+    
+	/* 상품 조회 페이지 */
+	@GetMapping("/goodsDetail")
+	public void goodsGetInfoGET(int bookId, Criteria cri, Model model) {
+		
+		logger.info("상세조회 페이지 Controller goodsDetail()........." + bookId);
+		
+		/* 목록 페이지 조건 정보 */
+		model.addAttribute("cri", cri);
+		
+		/* 조회 페이지 정보 */
+		model.addAttribute("goodsInfo", adminService.goodsGetDetail(bookId));
+		
+	}
     
     /* 작가 등록 페이지 접속 */
     @RequestMapping(value = "/authorEnroll", method = RequestMethod.GET)
@@ -135,7 +179,12 @@ public class AdminController {
 		
 		logger.info("goodsEnrollPOST......" + book);
 		
-		adminService.bookEnroll(book);
+		try {
+			adminService.bookEnroll(book);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		rttr.addFlashAttribute("enroll_result", book.getBookName());
 		
