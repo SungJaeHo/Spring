@@ -17,7 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vam.memberapp.model.Criteria;
 import com.vam.memberapp.model.dto.AuthorVO;
+import com.vam.memberapp.model.dto.BookVO;
 import com.vam.memberapp.model.dto.PageDTO;
+import com.vam.memberapp.model.service.AdminService;
 import com.vam.memberapp.model.service.AuthorService;
 
 @Controller
@@ -28,6 +30,8 @@ public class AdminController {
     
 	@Autowired
     private AuthorService authorService;
+	
+	@Autowired AdminService adminService;
 	
     /* 관리자 메인 페이지 이동 */
     @RequestMapping(value="/main", method = RequestMethod.GET)
@@ -124,6 +128,41 @@ public class AdminController {
 		return "redirect:/admin/authorManage";
 		
 	}
-    
+	
+    /* 상품 등록 */
+	@PostMapping("/goodsEnroll")
+	public String goodsEnrollPOST(BookVO book, RedirectAttributes rttr) {
+		
+		logger.info("goodsEnrollPOST......" + book);
+		
+		adminService.bookEnroll(book);
+		
+		rttr.addFlashAttribute("enroll_result", book.getBookName());
+		
+		return "redirect:/admin/goodsManage";
+	}
+	
+	/* 작가 검색 팝업창 */
+	@GetMapping("/authorPop")
+	public void authorPopGET(Criteria cri, Model model) throws Exception{
+		
+		logger.info("Contorll ::>>authorPopGET>>>>>>>>>>");
+		
+		cri.setAmount(5);
+		
+		/* 게시물 출력 데이터 */
+		List list = authorService.authorGetList(cri);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list",list); // 작가 존재 경우 
+		}else {
+			model.addAttribute("listCheck","empty"); // 작가 존재 XX
+		}
+		
+		/* 페이지 이동 인터페이스 데이터 */
+		model.addAttribute("pageMaker",new PageDTO(cri, authorService.authorGetTotal(cri)));
+		
+	
+	}
     
 }

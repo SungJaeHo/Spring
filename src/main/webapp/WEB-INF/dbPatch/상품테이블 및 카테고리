@@ -1,0 +1,29 @@
+-- 상품 테이블 
+create table semi_book(
+    BOOKID int primary key auto_increment,
+    BOOKNAME varchar(50)   not null,
+    AUTHORID int,
+    PUBLEYEAR Date not null,
+    PUBLISHER varchar(70) not null,
+    CATECODE varchar(30),
+    BOOKPRICE int not null,
+    BOOKSTOCK int not null,
+    BOOKDISCOUNT decimal(2,2),
+    BOOKINTRO text,
+    BOOKCONTENTS text,
+    REGDATE timestamp default now(),
+    UPDATEDATE timestamp default now()
+);;
+
+
+-- 상품 카테고리 
+create table semi_bcate(
+    TIER int(1) not null,
+    CATENAME varchar(30) not null,
+    CATECODE varchar(30) not null,
+    CATEPARENT varchar(30) ,
+    primary key(CATECODE),
+    foreign key(CATEPARENT) references semi_bcate(CATECODE) 
+);
+
+
