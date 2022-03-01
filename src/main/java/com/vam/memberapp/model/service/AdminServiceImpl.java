@@ -44,8 +44,24 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.goodsGetTotal(cri);
 	}	
 	
+	/* 상품 상세 정보 */
 	@Override
 	public BookVO goodsGetDetail(int bookId) {
+		logger.info("Admin서비스 goodsGetDetail()::::>>>>>>>>"+ bookId);
 		return adminDao.goodsGetDetail(bookId);
+	}
+	
+	/* 상품 상세 수정 */
+	@Override
+	public int goodsModify(BookVO vo) {
+		logger.info("Admin서비스 goodsModify()::::>>>>>>>>"+ vo);
+		return adminDao.goodsModify(vo);
+	}
+	
+	/* 상품 상세 삭제 */
+	@Override
+	public int goodsDelete(int bookId) {
+		logger.info("Admin서비스 goodsDelete()::::>>>>>>>>"+ bookId);
+		return adminDao.goodsDelete(bookId);
 	}
 }

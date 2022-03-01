@@ -45,4 +45,10 @@ public class AuthorDaoImpl implements AuthorDao{
 		logger.info("(daoImpl)authorModify()::::::::>>>>>" + author);
 		return sqlSession.update("AUTHOR.authorModify",author);
 	}
+	
+	@Override
+	public int authorDelete(int authorId) {
+		logger.info("(daoImpl)authorDelete()::::::::>>>>>" + authorId);
+		return sqlSession.delete("AUTHOR.authorDelete", authorId);
+	}
 }

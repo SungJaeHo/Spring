@@ -85,7 +85,7 @@ public class AdminController {
     }
     
 	/* 상품 조회 페이지 */
-	@GetMapping("/goodsDetail")
+	@GetMapping({"/goodsDetail", "/goodsModify"})
 	public void goodsGetInfoGET(int bookId, Criteria cri, Model model, CateVO cateVO ) throws JsonProcessingException, Exception {
 		
 		logger.info("상세조회 페이지 Controller goodsDetail()........." + bookId);
@@ -105,6 +105,36 @@ public class AdminController {
 		/* 조회 페이지 정보 */
 		model.addAttribute("goodsInfo", adminService.goodsGetDetail(bookId));
 		logger.info("상세조회 페이지 Controller goodsInfo::::::>>>>>>>>" + model);
+		
+	}
+	
+	/* 상품 정보 수정 */
+	@PostMapping("/goodsModify")
+	public String goodsModifyPOST(BookVO vo, RedirectAttributes rttr) {
+		
+		logger.info("goodsModifyPOST::::::>>>>>>>>>" + vo);
+		
+		int result = adminService.goodsModify(vo);
+		
+		logger.info("goodsModifyPOST:::::: result >>>>>>>>>" + result);
+		
+		rttr.addFlashAttribute("modify_result", result);
+		
+		return "redirect:/admin/goodsManage";		
+		
+	}
+	
+	/* 상품 정보 삭제 */
+	@PostMapping("/goodsDelete")
+	public String goodsDeletePOST(int bookId, RedirectAttributes rttr) {
+		
+		logger.info("goodsDeletePOST ::::: >>>>>");
+		
+		int result = adminService.goodsDelete(bookId);
+		
+		rttr.addFlashAttribute("delete_result", result);
+		
+		return "redirect:/admin/goodsManage";
 		
 	}
     
@@ -183,6 +213,35 @@ public class AdminController {
 		return "redirect:/admin/authorManage";
 		
 	}
+	
+	/* 작가 정보 삭제 */
+	@PostMapping("/authorDelete")
+	public String authorDeletePOST(int authorId, RedirectAttributes rttr) {
+		
+		logger.info("authorDeletePOST..........");
+		
+		int result = 0;
+		
+		try {
+			
+			result = authorService.authorDelete(authorId);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			result = 2;
+			rttr.addFlashAttribute("delete_result", result);
+			
+			return "redirect:/admin/authorManage";
+			
+		}
+		
+		
+		rttr.addFlashAttribute("delete_result", result);
+		
+		return "redirect:/admin/authorManage";
+		
+	}	
 	
     /* 상품 등록 */
 	@PostMapping("/goodsEnroll")

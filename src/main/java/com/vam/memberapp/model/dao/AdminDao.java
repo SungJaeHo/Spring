@@ -19,4 +19,11 @@ public interface AdminDao {
 	public int goodsGetTotal(Criteria cri);
 	
 	public BookVO goodsGetDetail(int bookId);
+	
+	/* 상품 수정 */
+	public int goodsModify(BookVO vo);
+	
+	/* 상품 삭제 */
+	public int goodsDelete(int bookId);
+	
 }

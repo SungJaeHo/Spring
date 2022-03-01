@@ -49,6 +49,10 @@ public class AuthorServiceImpl implements AuthorService {
 		return authorDao.authorModify(author);
 	}
     
-    
+    @Override
+    public int authorDelete(int authorId) {
+    	logger.info("(service)authorDelete()......." + authorId);
+    	return authorDao.authorDelete(authorId);
+    }
     
 }

@@ -20,5 +20,7 @@ public interface AuthorDao {
    
     /* 작가 정보 수정*/
     public int authorModify(AuthorVO author);
+
+	public int authorDelete(int authorId);
     
 }

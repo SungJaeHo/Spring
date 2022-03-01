@@ -73,7 +73,7 @@
                     				<label>출판일</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="publeYear" autocomplete="off" readonly="readonly" value="<c:out value="${goodsInfo.publeYear}"/>" disabled>                   				
+                    				<input name="publeYear" autocomplete="off" readonly="readonly" value="<c:out value="${goodsInfo.publeYear}"/>" disabled>
                     			</div>
                     		</div>            
                     		<div class="form_section">
@@ -165,7 +165,7 @@
                    			<div class="btn_section">
                    				<button id="cancelBtn" class="btn">상품 목록</button>
 	                    		<button id="modifyBtn" class="btn enroll_btn">수정 </button>
-	                    	</div>  
+	                    	</div> 
                     </div>      
 
                 	
@@ -353,7 +353,7 @@
 			$("#moveForm").append(addInput);
 			$("#moveForm").attr("action", "/admin/goodsModify");
 			$("#moveForm").submit();
-		});			
+		});		
 		
 	</script>
 
