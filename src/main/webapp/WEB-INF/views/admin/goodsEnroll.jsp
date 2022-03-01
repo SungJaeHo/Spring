@@ -349,7 +349,7 @@ $("#enrollBtn").on("click",function(e){
 	let cateSelect1 = $(".cate1");		
 	let cateSelect2 = $(".cate2");
 	let cateSelect3 = $(".cate3");
-	
+	debugger;
 	/* 카테고리 배열 초기화 메서드 */
 	function makeCateArray(obj,array,cateList, tier){
 		for(let i = 0; i < cateList.length; i++){
@@ -428,7 +428,7 @@ $("#enrollBtn").on("click",function(e){
 		let discountInput = $("input[name='bookDiscount']");
 		
 		let discountRate = userInput.val();					// 사용자가 입력할 할인값
-		let sendDiscountRate = discountRate / 100;					// 서버에 전송할 할인값
+		let sendDiscountRate = discountRate / 100;					// 서버에 전송할 할인 값
 		let goodsPrice = $("input[name='bookPrice']").val();			// 원가
 		let discountPrice = goodsPrice * (1 - sendDiscountRate);		// 할인가격
 		
@@ -444,7 +444,7 @@ $("#enrollBtn").on("click",function(e){
 		let discountInput = $("input[name='bookDiscount']");
 		
 		let discountRate = userInput.val();					// 사용자가 입력한 할인값
-		let sendDiscountRate = discountRate / 100;		 	// 서버에 전송할 할인값
+		let sendDiscountRate = discountRate / 100;		 	// 서버에 전송할 할인 값
 		let goodsPrice = $("input[name='bookPrice']").val();			// 원가
 		let discountPrice = goodsPrice * (1 - sendDiscountRate);		// 할인가격
 		
