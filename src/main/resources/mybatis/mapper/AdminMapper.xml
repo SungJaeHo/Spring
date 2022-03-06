@@ -6,7 +6,11 @@
 
 	<!-- 작가 등록 -->
 	<insert id="bookEnroll">
-
+  		<selectKey resultType="int" keyProperty="bookId" order="BEFORE">
+  		
+  			SELECT MAX(bookId)+1 FROM semi_book
+  		
+  		</selectKey>
 		insert into semi_book(
 			bookName, authorId, publeYear, publisher, cateCode
 		   ,bookPrice, bookStock, bookDiscount, bookIntro, bookContents
@@ -72,5 +76,16 @@
 		delete from semi_book where bookId = #{bookId}
 	
 	</delete>
+	
+	
+	<!-- 이미지 등록 -->
+	<insert id="imageEnroll">
+		insert into semi_image (
+			bookId, fileName, uploadPath, uuid
+			) 
+		values (
+			#{bookId}, #{fileName}, #{uploadPath}, #{uuid}
+		)
+	</insert>
 	
 </mapper>

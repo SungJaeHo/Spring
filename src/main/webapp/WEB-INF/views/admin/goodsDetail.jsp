@@ -160,7 +160,7 @@
 																		
 									</div>
                     			</div>
-                    		</div>                    		
+                    		</div>
                    		
                    			<div class="btn_section">
                    				<button id="cancelBtn" class="btn">상품 목록</button>
@@ -315,7 +315,7 @@
 					
 					let str = "";
 					str += "<div id='result_card'>";
-					str += "<img src='/resources/img/goodsNoImage.png'>";
+					str += "<img src='/resources/img/VBOOK.png'>";
 					str += "</div>";
 					
 					uploadReslut.html(str);						
@@ -335,8 +335,8 @@
 				
 				uploadReslut.html(str);						
 				
-			});					
-			
+			});			
+
 			
 		}); // $(document).ready
 	

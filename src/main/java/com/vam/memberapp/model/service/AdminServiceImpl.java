@@ -23,6 +23,18 @@ public class AdminServiceImpl implements AdminService{
 	public void bookEnroll(BookVO book) {
 		logger.info("AdminService::>>>>BookEnroll");
 		adminDao.bookEnroll(book);
+		
+		if(book.getImageList() == null || book.getImageList().size() <= 0) {
+			return;
+		}
+		
+		book.getImageList().forEach(attach ->{
+			
+			attach.setBookId(book.getBookId());
+			adminDao.imageEnroll(attach);
+			
+		});
+		
 	}
 	
 	@Override

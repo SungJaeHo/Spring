@@ -501,6 +501,11 @@ $("#enrollBtn").on("click",function(e){
 	/* 이미지 업로드 */
 	$("input[type='file']").on("change", function(e){
 		
+		/* 이미지 존재시 삭제 */
+		if($(".imgDeleteBtn").length > 0){
+			deleteFile();
+		}
+		
 		let formData = new FormData();
 		let fileInput = $('input[name="uploadFile"]');
 		let fileList = fileInput[0].files;
@@ -570,13 +575,46 @@ $("#enrollBtn").on("click",function(e){
 		
 		str += "<div id='result_card'>";
 		str += "<img src='/display?fileName=" + fileCallPath +"'>";
-		str += "<div class='imgDeleteBtn'>x</div>";
+		str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
+		str += "<input type='hidden' name='imageList[0].fileName' value='"+ obj.fileName +"'>";
+		str += "<input type='hidden' name='imageList[0].uuid' value='"+ obj.uuid +"'>";
+		str += "<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.uploadPath +"'>";	
 		str += "</div>";		
 		
    		uploadResult.append(str);     
         
 	}	
+	/* 파일 삭제 메서드 */
+	function deleteFile(){
+		
+		let targetFile = $(".imgDeleteBtn").data("file");
+		
+		let targetDiv = $("#result_card");
+		
+		$.ajax({
+			url: '/admin/deleteFile',
+			data : {fileName : targetFile},
+			dataType : 'text',
+			type : 'POST',
+			success : function(result){
+				console.log(result);
+				
+				targetDiv.remove();
+				$("input[type='file']").val("");
+				
+			},
+			error : function(result){
+				console.log(result);
+				
+				alert("파일을 삭제하지 못하였습니다.")
+			}
+		});
+	}
 	
+	/* 이미지 삭제 버튼 동작 */
+	$("#uploadResult").on("click", ".imgDeleteBtn", function(e){
+		deleteFile();
+	});
 </script> 
 
 </html>

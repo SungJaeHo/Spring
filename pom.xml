@@ -229,6 +229,13 @@
 		    <artifactId>thumbnailator</artifactId>
 		    <version>0.4.13</version>
 		</dependency>	
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
 
 	</dependencies>
 	<build>

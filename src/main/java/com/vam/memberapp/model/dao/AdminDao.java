@@ -3,6 +3,7 @@ package com.vam.memberapp.model.dao;
 import java.util.List;
 
 import com.vam.memberapp.model.Criteria;
+import com.vam.memberapp.model.dto.AttachImageVO;
 import com.vam.memberapp.model.dto.BookVO;
 import com.vam.memberapp.model.dto.CateVO;
 
@@ -26,4 +27,6 @@ public interface AdminDao {
 	/* 상품 삭제 */
 	public int goodsDelete(int bookId);
 	
+	/* 이미지 등록 */
+	public void imageEnroll(AttachImageVO vo);
 }

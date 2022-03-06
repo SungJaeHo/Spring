@@ -1,0 +1,8 @@
+    create table semi_image(
+        bookId int ,
+        fileName varchar(100) not null,
+        uploadPath varchar(200) not null,
+        uuid varchar(100)not null ,
+        primary key (uuid),
+        foreign key (bookId) references semi_book(bookId)
+    );
