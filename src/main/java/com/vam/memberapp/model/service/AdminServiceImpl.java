@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vam.memberapp.model.Criteria;
 import com.vam.memberapp.model.dao.AdminDao;
@@ -64,10 +65,26 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	/* 상품 상세 수정 */
+	@Transactional
 	@Override
 	public int goodsModify(BookVO vo) {
 		logger.info("Admin서비스 goodsModify()::::>>>>>>>>"+ vo);
-		return adminDao.goodsModify(vo);
+		
+		int result = adminDao.goodsModify(vo);
+		
+		if(result == 1 && vo.getImageList() != null && vo.getImageList().size() > 0) {
+			
+			adminDao.deleteImageAll(vo.getBookId());
+			
+			vo.getImageList().forEach(attach -> {
+				
+				attach.setBookId(vo.getBookId());
+				adminDao.imageEnroll(attach);
+				
+			});
+			
+		}
+		return result;
 	}
 	
 	/* 상품 상세 삭제 */

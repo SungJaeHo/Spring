@@ -65,4 +65,16 @@ public class AdminDaoImpl implements AdminDao{
 		logger.info("AdminDaoImpl 이미지 등록 :::>>>>>>>>imageEnroll");
 		sqlSession.insert("Admin.imageEnroll",vo);
 	}
+	
+	@Override
+	public void deleteImageAll(int bookId) {
+		logger.info("AdminDaoImpl 지정 상품 이미지 전체 삭제 :::>>>>>>>>deleteImageAll");
+		sqlSession.delete("Admin.deleteImageAll", bookId);
+	}
+	
+	@Override
+	public List<AttachImageVO> checkFileList() {
+		logger.info("AdminDaoImpl 배치프로그램 이미지 :::>>>>>>>>AttachImageVO");
+		return sqlSession.selectList("Admin.checkFileList");
+	}
 }
