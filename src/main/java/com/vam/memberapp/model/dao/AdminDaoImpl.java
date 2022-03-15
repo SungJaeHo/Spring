@@ -77,4 +77,10 @@ public class AdminDaoImpl implements AdminDao{
 		logger.info("AdminDaoImpl 배치프로그램 이미지 :::>>>>>>>>AttachImageVO");
 		return sqlSession.selectList("Admin.checkFileList");
 	}
+	
+	@Override
+	public List<AttachImageVO> getAttachInfo(int bookId) {
+		logger.info("AdminDaoImpl 지정 상품 이미지 정보 얻기 :::>>>>>>>>getAttachInfo");
+		return sqlSession.selectList("Admin.getAttachInfo", bookId);
+	}
 }

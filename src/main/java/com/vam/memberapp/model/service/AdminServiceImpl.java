@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vam.memberapp.model.Criteria;
 import com.vam.memberapp.model.dao.AdminDao;
+import com.vam.memberapp.model.dto.AttachImageVO;
 import com.vam.memberapp.model.dto.BookVO;
 import com.vam.memberapp.model.dto.CateVO;
 @Service
@@ -91,6 +92,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int goodsDelete(int bookId) {
 		logger.info("Admin서비스 goodsDelete()::::>>>>>>>>"+ bookId);
+		
+		adminDao.deleteImageAll(bookId);
+		
 		return adminDao.goodsDelete(bookId);
+	}
+	
+	/* 상품 이미지 정보 삭제 */
+	@Override
+	public List<AttachImageVO> getAttachInfo(int bookId) {
+		logger.info("Admin서비스 getAttachInfo()::::>>>>>>>>"+ bookId);
+		return adminDao.getAttachInfo(bookId);
 	}
 }

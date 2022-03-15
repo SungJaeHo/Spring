@@ -15,7 +15,7 @@
 		<level value="info" />
 	</logger>
 		<logger name="com.vam.memberapp">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

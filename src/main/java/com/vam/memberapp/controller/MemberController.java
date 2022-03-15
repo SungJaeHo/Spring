@@ -68,11 +68,11 @@ public class MemberController {
 	}
 	
 	//메인 페이지 이동
-	@RequestMapping(value = "/member/main", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/member/main", method = RequestMethod.GET)
 	public void mainPageGET() {
 		logger.info("메인 페이지 진입");
 		
-	}
+	}*/
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public void joinGET() {

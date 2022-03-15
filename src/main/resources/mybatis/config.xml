@@ -14,6 +14,7 @@
 		<mapper resource="/mybatis/mapper/AuthorMapper.xml" />
 		<mapper resource="/mybatis/mapper/AdminMapper.xml" />
 		<mapper resource="/mybatis/mapper/AttachMapper.xml" />
+		<mapper resource="/mybatis/mapper/BookMapper.xml" />
 	</mappers>
 
 </configuration>

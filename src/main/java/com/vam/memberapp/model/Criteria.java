@@ -18,6 +18,12 @@ public class Criteria {
     /* 검색 키워드 */
     private String keyword;
     
+	/* 작가 리스트 */
+	private String[] authorArr;
+	
+	/* 카테고리 코드 */
+	private String cateCode;
+    
     /* Criteria 생성자 */
     public Criteria(int pageNum, int amount) {
         this.pageNum = pageNum;
@@ -41,7 +47,6 @@ public class Criteria {
 
 	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
-		this.skip = (pageNum - 1) * this.amount;
 	}
 
 	public int getAmount() {
@@ -50,7 +55,6 @@ public class Criteria {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
-		this.skip = (this.pageNum -1) * amount;
 	}
 
 	public int getSkip() {
@@ -77,14 +81,25 @@ public class Criteria {
 		this.keyword = keyword;
 	}
 
-	@Override
-	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", skip=" + skip + ", type=" + type
-				+ ", keyword=" + keyword + ", getTypeArr()=" + Arrays.toString(getTypeArr()) + ", getPageNum()="
-				+ getPageNum() + ", getAmount()=" + getAmount() + ", getSkip()=" + getSkip() + ", getType()="
-				+ getType() + ", getKeyword()=" + getKeyword() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+	public String[] getAuthorArr() {
+		return authorArr;
+	}
+
+	public void setAuthorArr(String[] authorArr) {
+		this.authorArr = authorArr;
+	}
+
+	public String getCateCode() {
+		return cateCode;
+	}
+
+	public void setCateCode(String cateCode) {
+		this.cateCode = cateCode;
 	}
     
-    
+	@Override
+	public String toString() {
+		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword
+				+ ", authorArr=" + Arrays.toString(authorArr) + ", cateCode=" + cateCode + "]";
+	}
 }

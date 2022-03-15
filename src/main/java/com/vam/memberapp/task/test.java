@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import com.vam.memberapp.model.dto.AttachImageVO;
 
 @Component
 public class test {
-	
+	/*
 	@Autowired
 	private AdminDao adminDao;
 	
@@ -76,7 +77,28 @@ public class test {
 			System.out.println(file);
 		}
 		System.out.println("========================================");
-	}
-
+		
+		List<File> removeFileList = new ArrayList<File>(Arrays.asList(targetFile));
+		
+		for(File file : targetFile){
+			checkFilePath.forEach(checkFile ->{
+				if(file.toPath().equals(checkFile)) 
+					removeFileList.remove(file);	
+			});
+		}
+		
+		System.out.println("removeFileList(필터 후) : ");
+		removeFileList.forEach(file -> {
+			System.out.println(file);
+		});
+		System.out.println("========================================");
+		
+		 파일 삭제 
+		for(File file : removeFileList) {
+			System.out.println("삭제 : " + file);
+			file.delete();
+		}
+		
+	}*/
 
 }

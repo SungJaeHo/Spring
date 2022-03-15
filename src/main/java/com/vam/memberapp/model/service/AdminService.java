@@ -3,6 +3,7 @@ package com.vam.memberapp.model.service;
 import java.util.List;
 
 import com.vam.memberapp.model.Criteria;
+import com.vam.memberapp.model.dto.AttachImageVO;
 import com.vam.memberapp.model.dto.BookVO;
 import com.vam.memberapp.model.dto.CateVO;
 
@@ -27,5 +28,8 @@ public interface AdminService {
 	
 	/* 상품 삭제 */
 	public int goodsDelete(int bookId);
+	
+	/* 지정 상품 이미지 정보 얻기 */
+	public List<AttachImageVO> getAttachInfo(int bookId);
 	
 }

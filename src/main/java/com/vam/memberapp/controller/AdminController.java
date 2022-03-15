@@ -1,11 +1,12 @@
 package com.vam.memberapp.controller;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -74,7 +75,7 @@ public class AdminController {
 			model.addAttribute("list", list);
 		} else {
 			model.addAttribute("listCheck", "empty");
-			return;
+			//return;
 		}
 		
 		logger.info("상품 관리(상품목록) 페이지 접속"+ list);
@@ -147,6 +148,31 @@ public class AdminController {
 	public String goodsDeletePOST(int bookId, RedirectAttributes rttr) {
 		
 		logger.info("goodsDeletePOST ::::: >>>>>");
+		
+		// 파일 이미지 경로 삭제
+		List<AttachImageVO> fileList = adminService.getAttachInfo(bookId);
+		// 파일 이미지 경로 삭제
+		if(fileList != null) {
+			
+			List<Path> pathList = new ArrayList();
+			
+			fileList.forEach(vo ->{
+				
+				// 원본 이미지
+				Path path = Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName());
+				pathList.add(path);
+				
+				// 섬네일 이미지
+				path = Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid()+"_" + vo.getFileName());
+				pathList.add(path);
+				
+			});
+			
+			pathList.forEach(path ->{
+				path.toFile().delete();
+			});
+			
+		}
 		
 		int result = adminService.goodsDelete(bookId);
 		
@@ -465,7 +491,8 @@ public class AdminController {
 		} // catch
 		
 		return new ResponseEntity<String>("success", HttpStatus.OK);
-		
 	}
+	
+	
 	
 }
